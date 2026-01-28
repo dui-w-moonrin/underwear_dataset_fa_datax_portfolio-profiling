@@ -1,0 +1,4 @@
+ Bucket , Relationship , Orphan Rows , Base Rows ,Base-Table, Orphan % , Severity , Severity 
+ A, `orders.shipping_method_id → shipping_methods.shipping_method_id` ,"2,278","2,286",orders ,99.65%, High , High 
+ B, `payments.payment_method_id → payment_methods.payment_method_id` ,685,686, payments ,99.85%, High , High 
+ C, `inventory_transactions.purchase_order_id → purchase_orders.purchase_order_id` ,"17,606","20,951", inventory_transactions ,84.03%, High , High 
