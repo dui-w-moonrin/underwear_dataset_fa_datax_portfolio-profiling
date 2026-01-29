@@ -2,7 +2,7 @@
 WATCHARAPONG 'DUI' MOONRIN
 
 ## About Dataset
-![Dataset cover](/images/dataset-cover.jpg "Dataset Cover")
+![Dataset cover](/images/dataset_cover.jpg "Dataset Cover")
 
 > This dataset originates from a wholesale company specializing in the marketing and sales of underwear, referred to as "the Company" henceforth. It represents a subset of the Company's comprehensive database, encompassing data on purchases, sales, orders, customers, prices, and much more, spanning a specific period. The dataset is organized across 11 tables, varying in size from a handful to over 100,000 rows. Thanks to primary and secondary indices linking these tables, the dataset offers an excellent opportunity to hone skills in SQL, data analysis, visualization, and machine learning. A table outlining the relationships between them is provided for clarity.
 
@@ -32,7 +32,7 @@ This mirrors FA responsibilities such as data requirements, mapping logic, valid
 
 ### Minor
 - MS Excel / Google Sheets / Rainbow CSV (VS Code) for quick CSV browsing and note-taking
-- mermaid.live for quick Mermaid diagram editing
+- [mermaid.live](https://mermaid.live) or [app.eraser.io](https://app.eraser.io) for quick Mermaid diagram editing
 
 ## Deliverable
 - `artifacts/scorecard.csv` — raw scorecard export (table-level + aggregated FK orphan checks)
@@ -52,7 +52,8 @@ See
 
 
 ## Dataset Scorecard (Preview)
-![ER Diagram](/artifacts/diagrams/er_kaggle_as_is.png "ER Diagram for all 11 tables relationship")
+![ER Diagram](/images/er_kaggle_as_is.png "initial ER Diagram for all 11 tables relationship")
+Full details in `docs/03_er_full_as_is.md`g
 
 |table_schema|table_name            |row_count|col_count|null_cells|total_cells|overall_null_pct|suspected_pk      |pk_null_pct|pk_duplicate_rows|date_min  |date_max  |neg_value_flags|fk_orphan_rows|dq_score_0_100|
 |------------|----------------------|---------|---------|----------|-----------|----------------|------------------|-----------|-----------------|----------|----------|---------------|--------------|--------------|
@@ -70,7 +71,7 @@ See
 
 - Full scorecard (raw): `artifacts/scorecard.csv`
 - Full scorecard (with score): `artifacts/scorecard_100.csv`
-- Full table statistics: `docs/tablestats/README.md` and `docs/tablestats/*.csv`
+- Full table statistics: `docs/tablestats/README.md`, `docs/03_table_stats.md` and `docs/tablestats/*.csv`
 - How the scorecard is generated: `docs/02_scorecard_howto.md`
 
 ### Scoring rule (simple / explainable)
@@ -84,7 +85,7 @@ See
 The goal is not “perfect math”, but an **auditable prioritization signal** for FA/DE collaboration.
 
 ## Flow & Lineage (Preview)
-> TODO: Add a small preview (diagram snippet). Full details in `docs/01_flow_and_lineage.md`.
+> TODO: Add a small preview (diagram snippet). Full details in `docs/04_flow_and_lineage.md`.
 
 
 ## Recon Buckets (Preview)
@@ -102,4 +103,4 @@ This dataset shows cross-table relationship breaks. For fast triage, issues are 
   - `inventory_transactions.purchase_order_id -> purchase_orders.purchase_order_id`
   - orphan rows: **17,606 / 20,951 inventory transactions (~84.03%)**
 
-Full breakdown and hypotheses: `docs/0x_recon_buckets_and_exception_list.md`
+Full breakdown and hypotheses: `docs/05_recon_buckets_and_exception_list.md`
