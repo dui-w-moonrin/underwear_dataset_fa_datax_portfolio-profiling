@@ -53,6 +53,7 @@ See
 
 ## Dataset Scorecard (Preview)
 ![ER Diagram](/images/er_kaggle_as_is.png "initial ER Diagram for all 11 tables relationship")
+
 Full details in `docs/03_er_full_as_is.md`g
 
 |table_schema|table_name            |row_count|col_count|null_cells|total_cells|overall_null_pct|suspected_pk      |pk_null_pct|pk_duplicate_rows|date_min  |date_max  |neg_value_flags|fk_orphan_rows|dq_score_0_100|
@@ -85,7 +86,9 @@ Full details in `docs/03_er_full_as_is.md`g
 The goal is not “perfect math”, but an **auditable prioritization signal** for FA/DE collaboration.
 
 ## Flow & Lineage (Preview)
-> TODO: Add a small preview (diagram snippet). Full details in `docs/04_flow_and_lineage.md`.
+![Flowchart overview](/artifacts/diagrams/flowchart_full.png "Flowchart overview")
+
+Full details (Mermaid + left/right breakdown): `docs/04_flowchart_mermaid.md`.
 
 
 ## Recon Buckets (Preview)
