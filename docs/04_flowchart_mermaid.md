@@ -90,12 +90,3 @@ The dataset shows **high-impact FK-orphan buckets** (used in scorecard + recon):
 Why the flowchart helps FA:
 - It shows **which downstream metrics will be corrupted** if a link breaks (e.g., “shipping method mix”, “payment channel mix”, “PO receiving completeness”)
 - It helps communicate to DE/owners **what to fix first** (high-severity broken edges)
-
----
-
-## 5) Optional Notes for Future Enhancements (Keep It Lean)
-
-If you later add a cleaned-data “extra”:
-- You can keep this exact diagram, but add a tiny note:
-  - `raw_*` → cleaned → `stg_*` (views)
-- The business-flow stays stable; only the “data prep layer” changes.

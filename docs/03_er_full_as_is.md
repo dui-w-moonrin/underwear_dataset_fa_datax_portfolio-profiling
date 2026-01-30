@@ -173,25 +173,7 @@ This helps readers interpret the ER quickly: **big tables** are event/transactio
 
 ---
 
-## 5) Known As-is Data Quality Findings (from the Scorecard)
-
-These are **not** “fixes” here — just captured findings to explain why the scorecard flags exist.
-
-### High orphan-FK buckets (A/B/C)
-- **A:** `orders.shipping_method_id → shipping_methods.shipping_method_id`  
-  orphan ≈ **2,278 / 2,286** (~99.65%)
-
-- **B:** `payments.payment_method_id → payment_methods.payment_method_id`  
-  orphan ≈ **685 / 686** (~99.85%)
-
-- **C:** `inventory_transactions.purchase_order_id → purchase_orders.purchase_order_id`  
-  orphan ≈ **17,606 / 20,951** (~84.03%)
-
-See the detailed bucket write-up in: `docs/06_recon_buckets_and_exception_list.md`
-
----
-
-## 6) Naming / Quoting Note (SQL Practicality)
+## 4) Naming / Quoting Note (SQL Practicality)
 
 The raw CSV uses **CamelCase** headers (e.g., `OrderID`). In PostgreSQL:
 - unquoted identifiers are folded to lowercase
@@ -199,16 +181,7 @@ The raw CSV uses **CamelCase** headers (e.g., `OrderID`). In PostgreSQL:
 
 This repo avoids that friction by exposing **`stg` views with normalized lowercase snake_case** (e.g., `order_id`), so all scorecard SQL stays clean.
 
----
-
-## 7) Date Format Note (As-is)
-
-Some date fields appear in **MM/DD/YYYY** string format (e.g., `10/13/2003`) rather than ISO `YYYY-MM-DD`.  
-This can trigger parsing issues if the database expects a different `DateStyle`. The scorecard pipeline uses safe parsing in `stg` / DQ functions to keep checks reproducible.
-
----
 
 ### References
 - ER image: `artifacts/diagrams/er_kaggle_as_is.png`
 - Scorecard output: `artifacts/scorecard.csv`
-- Recon buckets: `docs/06_recon_buckets_and_exception_list.md`
