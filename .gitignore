@@ -18,3 +18,7 @@ Thumbs.db
 # --- Python build/test ---
 .pytest_cache/
 .mypy_cache/
+
+# --- local test field file ---
+python/99_test_field.py
+

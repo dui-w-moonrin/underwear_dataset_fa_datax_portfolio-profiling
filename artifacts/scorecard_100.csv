@@ -1,12 +1,12 @@
 table_schema,table_name,row_count,col_count,null_cells,total_cells,overall_null_pct,suspected_pk,pk_null_pct,pk_duplicate_rows,date_min,date_max,neg_value_flags,fk_orphan_rows,dq_score_0_100
 stg,customers,225,8,4,1800,0.2222,customer_id,0.0,0,,,,,100
 stg,employees,15,2,0,30,0.0,employee_id,0.0,0,,,,,100
-stg,inventory_transactions,20951,9,46433,188559,24.6252,transaction_id,0.0,0,2003-10-15,2005-12-15,0.0,17606.0,47
+stg,inventory_transactions,20951,9,46433,188559,24.6252,transaction_id,0.0,0,2003-10-15,2005-12-15,0.0,0.0,80
 stg,order_details,105757,5,0,528785,0.0,order_detail_id,0.0,0,,,0.0,0.0,100
-stg,orders,2286,7,8,16002,0.05,order_id,0.0,0,2001-10-20,2005-12-28,0.0,2278.0,60
+stg,orders,2286,7,8,16002,0.05,order_id,0.0,0,2001-10-20,2005-12-28,0.0,0.0,100
 stg,payment_methods,3,2,0,6,0.0,payment_method_id,0.0,0,,,,,100
-stg,payments,686,5,2,3430,0.0583,payment_id,0.0,0,2003-10-10,2003-12-30,0.0,685.0,60
+stg,payments,686,5,2,3430,0.0583,payment_id,0.0,0,2003-10-10,2003-12-30,0.0,0.0,100
 stg,products,4183,14,4144,58562,7.0763,product_id,0.0,0,2003-10-15,2005-11-23,0.0,,94
-stg,purchase_orders,232,5,5,1160,0.431,purchase_order_id,0.0,0,2003-10-15,2005-11-29,,227.0,61
+stg,purchase_orders,232,5,5,1160,0.431,purchase_order_id,0.0,0,2003-10-15,2005-11-29,,0.0,100
 stg,shipping_methods,4,2,0,8,0.0,shipping_method_id,0.0,0,,,,,100
 stg,suppliers,2,2,0,4,0.0,supplier_id,0.0,0,,,,,100
