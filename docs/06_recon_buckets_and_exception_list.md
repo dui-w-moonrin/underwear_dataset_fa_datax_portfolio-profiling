@@ -1,236 +1,197 @@
-# Recon Buckets & Exception List (0x)
+# Recon Buckets & Exception List (06)
 
-This document summarizes **cross-table integrity breaks** discovered during profiling of the Underwear (11-table) dataset, plus a related **date-format anomaly** that affects reproducible parsing.
+This document summarizes cross-table relationship health (FK-style integrity) found during profiling of the **Underwear (11-table)** dataset, plus a **date-format note** that affects reproducible parsing.
 
-> **Purpose (FA-style):** provide an auditable, SQL-backed triage view of what is broken, how big the impact is, and what a Functional Analyst would do next (hypotheses, impact, and recommended actions for DE / source owners / UAT).
-
----
-
-## 1) Executive Summary
-
-### Key Findings (Top 3 buckets)
-
-|Bucket |Relationship                                                                    |Orphan Rows|Base Rows|Base Table             |Orphan %|Severity|
-|-------|--------------------------------------------------------------------------------|-----------|---------|-----------------------|--------|--------|
-| **A** | `orders.shipping_method_id → shipping_methods.shipping_method_id`              | 2,278     | 2,286   |orders                 | 99.65% | High   |
-| **B** | `payments.payment_method_id → payment_methods.payment_method_id`               | 685       | 686     |payments               | 99.85% | High   |
-| **C** | `inventory_transactions.purchase_order_id → purchase_orders.purchase_order_id` | 17,606    | 20,951  |inventory_transactions | 84.03% | High   |
-
-**Interpretation:** these are not “small exceptions.” They indicate **systematic mapping gaps** (lookup domains incomplete or incompatible), which would break downstream reconciliation, attribution, and any BI or regulatory-style reporting that assumes referential integrity.
+> **FA intent:** Provide an auditable triage view of what is broken vs unknown, how big the impact is, and what to do next (hypotheses, impacts, recommended actions, and UAT questions).
 
 ---
 
-## 2) How “Recon Buckets” are defined
+## 0) Scope & Definitions
 
-### 2.1 Definition
-A **Recon Bucket** groups a major integrity break where:
+### What this report covers
+- Cross-table relationship checks at **stg** layer (joinability / traceability)
+- Bucket-style prioritization (A/B/C = most meaningful relationships to explain quickly)
+- Date-format note (because date columns are stored as **text** in stg)
 
-- a column behaves like a foreign key (FK),
-- but values in the child table do **not** exist in the parent table (lookup/dimension),
-- resulting in **orphan rows**.
+### What this report does NOT cover (by design)
+- Full data cleansing / standardization of all fields (optional extension)
+- Building a business KPI model or dashboard
 
-This is tracked in:
-- `dq.fk_orphans_detail` (by relationship)
-- aggregated into `artifacts/scorecard.csv` / `artifacts/scorecard_100.csv` (by table)
+---
 
-### 2.2 Core check (conceptual SQL)
-For a relationship `child.fk → parent.pk`, the orphan count is:
+## 1) Relationship Health: Terms (must read)
+
+When checking `child_fk -> parent_pk`, we classify each child row into:
+
+- **FK NULL**: child FK is NULL → relationship is **unknown** (cannot join)
+- **Matched**: child FK is NOT NULL and exists in parent PK → relationship is **valid**
+- **Orphan**: child FK is NOT NULL but missing in parent PK → relationship is **broken**
+
+> Key idea:  
+> - **Orphan = broken link** (data contradicts the parent table)  
+> - **NULL-FK = unknown link** (data is missing; parent may exist but we can’t join)
+
+---
+
+## 2) Executive Summary (Buckets A/B/C)
+
+### 2.1 Bucket Table (Correct Interpretation)
+
+|Bucket|Relationship                                                                  |Base Rows|FK NULL Rows|FK Non-NULL Rows|Matched Rows|Orphan Rows|NULL %|Severity|
+|------|------------------------------------------------------------------------------|--------:|-----------:|---------------:|-----------:|----------:|-----:|--------|
+|**A** |`orders.shipping_method_id → shipping_methods.shipping_method_id`             |2,286    |8           |2,278           |2,278       |0          |0.35% |Low     |
+|**B** |`payments.payment_method_id → payment_methods.payment_method_id`              |686      |1           |685             |685         |0          |0.15% |Low     |
+|**C** |`inventory_transactions.purchase_order_id → purchase_orders.purchase_order_id`|20,951   |3,345       |17,606          |17,606      |0          |15.97%|High    |
+
+### 2.2 What the table means (one-liners)
+- **A (Orders ↔ Shipping Methods)**: join is **almost fully usable**; only **8 orders** have unknown shipping method (NULL FK)
+- **B (Payments ↔ Payment Methods)**: join is **almost fully usable**; only **1 payment** has unknown method (NULL FK)
+- **C (Inventory Tx ↔ Purchase Orders)**: a meaningful portion (**~16%**) of inventory transactions cannot be tied to a PO → procurement traceability is partially missing
+
+---
+
+## 3) Evidence Pointers (Where numbers come from)
+
+Primary outputs:
+- `artifacts/scorecard.csv`
+- `artifacts/scorecard_100.csv`
+- `sql/10_scorecard/05_fk_orphans.sql` (FK checks)
+
+Recommended “proof query” pattern per relationship:
 
 ```sql
-select count(*) as orphan_rows
-from child c
-left join parent p
-  on c.fk = p.pk
-where c.fk is not null
-  and p.pk is null;
+select
+  count(*) as base_rows,
+  count(*) filter (where c.fk_col is null) as fk_null_rows,
+  count(*) filter (where c.fk_col is not null) as fk_non_null_rows,
+  count(*) filter (where c.fk_col is not null and p.pk_col is not null) as matched_rows,
+  count(*) filter (where c.fk_col is not null and p.pk_col is null) as orphan_rows
+from stg.child_table c
+left join stg.parent_table p
+  on c.fk_col = p.pk_col;
 ```
 
-> Note: This project reports **aggregated orphan rows** by table in the scorecard, and relationship-level details in `dq.fk_orphans_detail`.
+> Tip: This avoids the common mistake of calling “missing match” an orphan when it’s actually “NULL FK”.
 
 ---
 
-## 3) Bucket A — Shipping Method mapping is missing for most Orders
+## 4) Bucket Details (Impact + Action + UAT)
 
-### 3.1 Relationship
-- **Child:** `stg.orders.shipping_method_id`
-- **Parent:** `stg.shipping_methods.shipping_method_id`
+### A — Orders ↔ Shipping Methods
 
-### 3.2 Impact
-- Orphan rows: **2,278**
-- Base rows: **2,286 orders**
-- Orphan ratio: **~99.65%**
+**Relationship:** `stg.orders.shipping_method_id → stg.shipping_methods.shipping_method_id`  
+**Result:** 8 NULL-FK, 2,278 matched, 0 orphans.
 
-**Why it matters:**
-- Any reporting that slices orders by shipping method will be **incorrect or impossible** (nearly all orders have an unmapped shipping method).
-- Lead-time / shipping KPI segmentation becomes unreliable.
+**Impact**
+- Shipping-method analysis is **almost completely reliable**
+- Only **8 orders** cannot be categorized by shipping method
 
-### 3.3 Top orphan FK values (exceptions)
-Observed orphan FK values and counts (sample/top):
+**Recommended actions**
+- Confirm what NULL means:
+  - cancelled orders?
+  - test / legacy import?
+  - “shipping method set later” workflow?
+- Define a rule:
+  - exclude these 8 rows from shipping-method breakdown
+  - OR allow “Unknown” category
 
-| shipping_method_id | orphan_rows |
-|-------------------:|------------:|
-| 1                  | 2,276       |
-| 3                  | 2           |
-
-> Interpretation: orphan values are heavily concentrated, suggesting a domain mismatch (e.g., lookup table missing expected IDs, or IDs not normalized/cast consistently).
-
-### 3.4 Hypotheses (FA triage)
-1. **Lookup table incomplete**: `shipping_methods` may be missing domain values referenced by orders.
-2. **Type/casting mismatch in staging**: FK values might be numeric in one table but text in another, or CamelCase identifiers required quoting and were normalized inconsistently.
-3. **Source-system semantics mismatch**: the field in orders might not be a true FK (could be a code from another domain).
-
-### 3.5 Recommended next actions
-- **Validate domain values**: list distinct `orders.shipping_method_id` vs `shipping_methods.shipping_method_id` and compare.
-- **Confirm intended semantics** in Kaggle ER notes / dataset description: is it a strict FK or “free-text code” originally?
-- If this were a real source system: **raise a DQ ticket** to source owner / DE to backfill or correct shipping_methods mapping.
+**UAT questions**
+- Do we expect every order to have a shipping method at creation time?
+- Is shipping method allowed to be assigned later (late binding)?
 
 ---
 
-## 4) Bucket B — Payment Method mapping is missing for most Payments
+### B — Payments ↔ Payment Methods
 
-### 4.1 Relationship
-- **Child:** `stg.payments.payment_method_id`
-- **Parent:** `stg.payment_methods.payment_method_id`
+**Relationship:** `stg.payments.payment_method_id → stg.payment_methods.payment_method_id`  
+**Result:** 1 NULL-FK, 685 matched, 0 orphans.
 
-### 4.2 Impact
-- Orphan rows: **685**
-- Base rows: **686 payments**
-- Orphan ratio: **~99.85%**
+**Impact**
+- Payment-method breakdown is usable
+- Only 1 record is “unknown method”
 
-**Why it matters:**
-- Payment method distribution (cash/card/etc.) becomes unusable.
-- Downstream reconciliation that depends on payment method rules cannot be trusted.
+**Recommended actions**
+- Clarify NULL semantics:
+  - cash/other/manual?
+  - incomplete entry?
 
-### 4.3 Top orphan FK values (exceptions)
-
-| payment_method_id | orphan_rows |
-|------------------:|------------:|
-| 1                 | 648         |
-| 2                 | 37          |
-
-> Interpretation: most payments refer to a small set of unmapped method IDs. This strongly suggests `payment_methods` is incomplete or uses a different ID domain.
-
-### 4.4 Hypotheses (FA triage)
-1. **Lookup table is not the real parent** (wrong join key/domain).
-2. **Lookup domain mismatch** (IDs differ; maybe payment_methods uses another key).
-3. **Staging normalization issue** (e.g., trimming/typing causes mismatch).
-
-### 4.5 Recommended next actions
-- Compare `distinct payment_method_id` values between payments and payment_methods.
-- Verify whether payment_methods contains the expected IDs (1,2,...) or uses non-numeric / different key.
-- If fixing: add missing domain rows or remap payment method IDs consistently.
+**UAT questions**
+- Is payment method mandatory for payment posting?
+- Can it be unknown temporarily then updated?
 
 ---
 
-## 5) Bucket C — Many Inventory Transactions cannot be traced to Purchase Orders
+### C — Inventory Transactions ↔ Purchase Orders
 
-### 5.1 Relationship
-- **Child:** `stg.inventory_transactions.purchase_order_id`
-- **Parent:** `stg.purchase_orders.purchase_order_id`
+**Relationship:** `stg.inventory_transactions.purchase_order_id → stg.purchase_orders.purchase_order_id`  
+**Result:** 3,345 NULL-FK, 17,606 matched, 0 orphans.
 
-### 5.2 Impact
-- Orphan rows: **17,606**
-- Base rows: **20,951 inventory_transactions**
-- Orphan ratio: **~84.03%**
+**Impact**
+- ~16% of inventory movements cannot be tied back to procurement documents (PO)
+- Limits:
+  - PO-based reconciliation (receiving completeness)
+  - supplier performance analysis
+  - procurement-to-stock audit trail
 
-**Why it matters:**
-- Stock movement traceability is broken for most transactions.
-- Any “procurement → receiving → inventory” audit trail becomes unreliable.
+**Likely hypotheses (data-story)**
+- Manual adjustments not tied to PO
+- Opening balance loads
+- Returns / write-offs / transfers represented without PO linkage
 
-### 5.3 Top orphan FK values (exceptions)
-Top offending `purchase_order_id` values with orphan rows (sample/top):
+**Recommended actions**
+- If business expects PO traceability:
+  - treat as data capture issue (missing PO reference)
+- If adjustments are expected:
+  - require/derive a `transaction_type` and document allowed reasons for NULL PO
 
-| purchase_order_id | orphan_rows |
-|----:|----:|
-| 175 | 689 |
-| 121 | 452 |
-| 307 | 414 |
-| 148 | 412 |
-| 308 | 366 |
-| 46  | 352 |
-| 54  | 349 |
-| 313 | 331 |
-| 309 | 330 |
-| 156 | 291 |
-| 52  | 287 |
-| 284 | 286 |
-| 57  | 282 |
-| 88  | 263 |
-| 74  | 253 |
-| 69  | 250 |
-| 303 | 249 |
-| 129 | 246 |
-| 183 | 230 |
-| 154 | 230 |
-| 107 | 223 |
-| 294 | 214 |
-| 100 | 194 |
-| 25  | 194 |
-| 195 | 184 |
-| 167 | 183 |
-| 75  | 182 |
-| 279 | 177 |
-| 39  | 176 |
-| 286 | 173 |
-
-> Interpretation: orphan values are spread across many PO IDs—this can indicate a broader mismatch between inventory_transactions and purchase_orders domains, not just a few missing rows.
-
-### 5.4 Hypotheses (FA triage)
-1. **Partial/filtered extract**: purchase_orders table may be a subset, while inventory_transactions references the full domain.
-2. **Not all inventory transactions originate from purchase orders**: some may come from adjustments/returns/transfers; the field may be optional or overloaded.
-3. **Key mismatch**: purchase_order_id in inventory_transactions might reference a different identifier than purchase_orders primary key.
-
-### 5.5 Recommended next actions
-- Split transactions by `transaction_type` (if available) to see if orphan ratio is concentrated in specific categories.
-- Validate whether orphan rows have `purchase_order_id` values that are out of the purchase_orders date range.
-- If real system: align with business owner on whether PO linkage is required for all transaction types.
+**UAT questions**
+- Which inventory movements must be PO-backed vs allowed as “adjustments”?
+- If NULL PO is allowed, what categories must exist?
 
 ---
 
-## 6) Date Format Drift — parsing anomalies in date fields
+## 5) Date Format Note (for README + reproducibility)
 
-### 6.1 Symptom
-While generating date ranges, strict parsing can fail on values like:
+### 5.1 Current state in DB
+- In `stg.*` views, date columns are still **TEXT** (from raw CSV), e.g.:
+  - `orders.order_date`, `orders.ship_date`
+  - `payments.payment_date`
+  - `products.inventory_date`
+  - `inventory_transactions.transaction_date`
+  - `purchase_orders.order_date`
 
-- `10/13/2003`
+### 5.2 Observed format
+- Many values look like US-style strings: **M/D/YYYY** (e.g., `7/10/2003`)
+- Some files may include variants; therefore parsing must be explicit if casting to `date`
 
-This value suggests **MM/DD/YYYY** format (because “13” cannot be a month), while other values are in ISO-like format.
-
-### 6.2 Why it matters
-- **Reproducibility risk:** strict casts may throw errors and stop pipelines.
-- **Profiling distortion:** date_min/date_max can be incorrect if parsing fails silently or inconsistently.
-- **Downstream impact:** lead time metrics, period grouping, and temporal validation become unreliable.
-
-### 6.3 How this project handles it (profiling scope)
-- Profiling uses a **tolerant parsing approach** to avoid hard failures when mixed formats exist.
-- When a field is too inconsistent, date_min/date_max may be partially unavailable or flagged for follow-up.
-
-### 6.4 Recommended next actions (if moving toward cleaning/ELT extra)
-- Standardize all date fields to ISO `YYYY-MM-DD` (or proper `DATE` types) in a cleaned layer.
-- Keep an **exception list** of unparseable date strings for source correction / rule decisions.
-- Document the chosen rule: prefer ISO, then detect MM/DD/YYYY, then fallback to NULL + exception logging.
+### 5.3 Recommendation (FA-friendly)
+- Keep `stg` as TEXT for profiling (transparent and cheap)
+- Add optional layer later:
+  - a `stg_cast` view, or
+  - a `dq.try_parse_date()` helper
+- Document the parsing rule used, so others can reproduce results
 
 ---
 
-## 7) Evidence pointers (where to look in the repo)
+## 6) Severity rubric (simple)
 
-- Relationship-level orphans:
-  - `dq.fk_orphans_detail` (table in PostgreSQL created by the SQL pack)
-- Scorecard outputs:
-  - `artifacts/scorecard.csv` (raw)
-  - `artifacts/scorecard_100.csv` (with `dq_score_0_100`)
-- SQL checks:
-  - `sql/10_scorecard/05_fk_orphans.sql`
-  - `sql/10_scorecard/03_date_range.sql` (tolerant parsing and date-range extraction)
+- **High**: affects major workflow linkage and impact > ~5–10%
+- **Medium**: major linkage but impact 1–5%
+- **Low**: small impact <1% or acceptable by business rule
+
+Current severity calls:
+- A = Low (NULL-FK only 0.35%)
+- B = Low (NULL-FK only 0.15%)
+- C = High (NULL-FK ~15.97%)
 
 ---
 
-## 8) Notes / Scope boundary
+## 7) Next steps (suggested order)
 
-This repo is a **profiling-first FA portfolio**. It intentionally prioritizes:
-
-- explainable, auditable integrity checks
-- reproducible SQL evidence
-- exception-oriented reporting for triage and UAT conversations
-
-Full cleaning/standardization is treated as an optional extension (extra folder), not a required dependency for the profiling deliverables.
+1) Keep this doc + scorecard as “profiling complete”
+2) If extending:
+   - standardize date parsing
+   - normalize numeric formats (thousand separators, currency)
+3) If moving to reconciliation/UAT:
+   - define business scenarios (orders-to-payments, PO-to-inventory)
+   - add UAT test cases referencing buckets A/B/C
