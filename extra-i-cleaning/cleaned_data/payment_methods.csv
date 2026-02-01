@@ -1,0 +1,4 @@
+payment_method_id,payment_method
+1,Cash
+2,Bank Transfer
+3,On Credit
