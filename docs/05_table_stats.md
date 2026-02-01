@@ -146,9 +146,9 @@ full dict list in
 |OrderDate|2003-07-11|2006-04-20|
 |ShipDate |2001-10-11|2006-04-20|
 
-OrderDate > ShipDate|
---------------------+
-                  12|
+|OrderDate > ShipDate|
+|--------------------|
+|                  12|
 
 ## PaymentMethods
 **Role:**
@@ -204,6 +204,7 @@ OrderDate > ShipDate|
 |50%  |602.6             |
 |75%  |1542.5            |
 |max  |20534.7           |
+
 ***noticeable outlier (max 20543.7)***
 
 ### Products

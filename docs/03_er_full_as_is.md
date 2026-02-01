@@ -6,7 +6,7 @@ This document captures the dataset ER **as provided (as-is)**, plus a **Mermaid 
 
 ## 1) ER Diagram
 
-![ER Diagram](/artifacts/diagrams/er-diagram-full-as-is.png "ER Diagram")
+![ER Diagram](/artifacts/diagrams/er_diagram_full_as_is.png "ER Diagram")
 
 ---
 

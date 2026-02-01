@@ -54,7 +54,7 @@ See
 ## Dataset Scorecard (Preview)
 ![ER Diagram](/images/er_kaggle_as_is.png "initial ER Diagram for all 11 tables relationship")
 
-Full details in `docs/03_er_full_as_is.md`g
+Full details in `docs/03_er_full_as_is.md`
 
 |table_schema|table_name            |row_count|col_count|null_cells|total_cells|overall_null_pct|suspected_pk      |pk_null_pct|pk_duplicate_rows|date_min  |date_max  |neg_value_flags|fk_orphan_rows|dq_score_0_100|
 |------------|----------------------|---------|---------|----------|-----------|----------------|------------------|-----------|-----------------|----------|----------|---------------|--------------|--------------|

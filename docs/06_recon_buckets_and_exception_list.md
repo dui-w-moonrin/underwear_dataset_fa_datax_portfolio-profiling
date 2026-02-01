@@ -173,6 +173,31 @@ left join stg.parent_table p
 
 ---
 
+---
+
+## 6) Additional Profiling Anomalies (single-table signals)
+
+> These are **profiling observations** (not fixes). They help scope follow-up validation rules and UAT questions.
+
+### 6.1 Orders — temporal anomaly
+- **OrderDate > ShipDate:** detected **12 orders** where `order_date` is later than `ship_date`.
+  - Typical interpretation: bad source timestamp, swapped fields, timezone/import issue, or re-shipment workflow recorded incorrectly.
+  - FA follow-up: confirm business rule — *Is ShipDate allowed to be earlier than OrderDate in any legitimate scenario?*
+
+### 6.2 Payments — amount outlier (tail risk)
+- `payments.payment_amount` has a long right tail; max payment is ~**20,534.7** while median is ~**602.6**.
+  - Profiling stance: not “wrong” by itself, but worth tagging for review (e.g., bulk orders, currency/unit mismatch, or data entry issues).
+
+### 6.3 OrderDetails / InventoryTransactions — extreme quantities
+- `order_details.quantity_sold` can be as high as **612** (most values are much smaller).
+- `inventory_transactions.quantity_ordered/received` can be as high as **1,475**, and `quantity_missing` up to **732**.
+  - FA follow-up: define what “bulk” looks like vs what should be flagged as suspicious (threshold-based rules).
+
+### 6.4 Products — high NULL concentration in descriptive attributes
+- `products.color` shows a very high NULL frequency (most rows), while other descriptive fields (e.g., gender count is relatively high) suggest taxonomy inconsistencies.
+  - FA follow-up: decide which attributes are **required** for analytics (e.g., Category/Gender/Size) vs optional.
+
+
 ## 6) Severity rubric (simple)
 
 - **High**: affects major workflow linkage and impact > ~5–10%
