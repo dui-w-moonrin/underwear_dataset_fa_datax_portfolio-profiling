@@ -97,27 +97,86 @@ def cast_id_columns_to_string(df: pd.DataFrame) -> tuple[pd.DataFrame, list[str]
     return df, id_cols
 
 
-def parse_date_columns(
-    df: pd.DataFrame,
-    *,
-    raw_format: str = RAW_DATE_FORMAT,
-) -> tuple[pd.DataFrame, list[str], dict[str, int]]:
+def parse_date_columns(df: pd.DataFrame, *, raw_format: str = RAW_DATE_FORMAT) -> tuple[pd.DataFrame, list[str], dict[str, int]]:
     """
-    Parse *_date columns using RAW_DATE_FORMAT and coerce invalid to NaT.
-    Returns invalid counts per column (non-null before - non-null after).
+    Smart date parsing for *_date columns.
+    Strategy:
+      1) Try strict RAW_DATE_FORMAT first (e.g., %m-%d-%Y).
+      2) If success rate is very low, try common alternatives.
+      3) Finally fallback to pandas inference.
+    Keeps errors='coerce' (conservative).
     """
     df = df.copy()
     date_cols = detect_date_columns(df)
     invalid_counts: dict[str, int] = {}
 
+    # Common formats we may encounter across different CSVs
+    common_formats = [
+        raw_format,       # e.g. %m-%d-%Y
+        "%Y-%m-%d",       # ISO
+        "%m/%d/%Y",       # US slashes
+        "%Y/%m/%d",       # ISO slashes
+        "%d-%m-%Y",       # just in case
+        "%d/%m/%Y",       # just in case
+    ]
+
     for c in date_cols:
-        non_null_before = int(df[c].notna().sum())
-        parsed = pd.to_datetime(df[c], format=raw_format, errors="coerce")
-        invalid = non_null_before - int(parsed.notna().sum())
-        invalid_counts[c] = int(invalid)
+        # If already datetime dtype, keep it
+        if pd.api.types.is_datetime64_any_dtype(df[c]):
+            parsed = df[c]
+        else:
+            s = df[c]
+
+            non_null_before = int(s.notna().sum())
+
+            # Work with strings for consistent parsing
+            s_str = s.astype("string").str.strip()
+            # optional small normalization
+            # (do NOT replace '-' aggressively; just trim spaces)
+            # s_str = s_str.str.replace(r"\s+", " ", regex=True)
+
+            parsed = None
+
+            # 1) Try RAW_DATE_FORMAT first (strict)
+            p1 = pd.to_datetime(s_str, format=raw_format, errors="coerce")
+            success1 = int(p1.notna().sum())
+            success_rate1 = (success1 / non_null_before) if non_null_before else 1.0
+
+            if success_rate1 >= 0.80:
+                parsed = p1
+            else:
+                # 2) Try other common formats, but only if they improve
+                best = p1
+                best_success = success1
+
+                for fmt in common_formats:
+                    if fmt == raw_format:
+                        continue
+                    p = pd.to_datetime(s_str, format=fmt, errors="coerce")
+                    succ = int(p.notna().sum())
+                    if succ > best_success:
+                        best = p
+                        best_success = succ
+
+                # If still too low, 3) fallback to inference
+                best_rate = (best_success / non_null_before) if non_null_before else 1.0
+                if best_rate < 0.80 and non_null_before > 0:
+                    pinfer = pd.to_datetime(s_str, errors="coerce", infer_datetime_format=True)
+                    succ_inf = int(pinfer.notna().sum())
+                    if succ_inf > best_success:
+                        best = pinfer
+                        best_success = succ_inf
+
+                parsed = best
+
+            # Count invalids: values that were non-null but became NaT
+            invalid = non_null_before - int(parsed.notna().sum())
+            invalid_counts[c] = int(invalid)
+
         df[c] = parsed
 
     return df, date_cols, invalid_counts
+
 
 
 def impute_descriptive_strings(df: pd.DataFrame, table_name: str) -> tuple[pd.DataFrame, dict[str, int]]:
