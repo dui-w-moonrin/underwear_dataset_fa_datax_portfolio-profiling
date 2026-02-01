@@ -12,9 +12,9 @@ This document captures the dataset ER **as provided (as-is)**, plus a **Mermaid 
 
 ## 2) ER Diagram (Mermaid — Reproducible)
 
-> Paste this block into https://mermaid.live (or render in GitHub Markdown that supports Mermaid).
+> Paste this block into https://mermaid.live , https://app.eraser.io (or render in GitHub Markdown that supports Mermaid).
 
-```mermaid
+```` mermaid
 erDiagram
   CUSTOMERS ||--o{ ORDERS : "CustomerID"
   EMPLOYEES ||--o{ ORDERS : "EmployeeID"
@@ -126,7 +126,7 @@ erDiagram
     date InventoryDate
     float PurchasePrice
   }
-```
+````
 
 ---
 
