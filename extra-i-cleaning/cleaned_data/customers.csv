@@ -1,0 +1,226 @@
+customer_id,customer_name,region,country,price_category,customer_class,lead_source,discontinued
+1,C1,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+2,C2,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+3,C3,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,1
+4,C4,Moscow,Russian Federation,4,Large-Scale Wholesaler-1,Referral by the Central Office,1
+5,C5,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+6,C6,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+7,C7,Moscow,Russian Federation,1,Consumer,Other,1
+8,C8,Moscow,Russian Federation,5,Consumer,Other,1
+9,C9,Moscow,Russian Federation,5,Retailer,Other,1
+10,C10,Perm,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,1
+11,C11,Pereslavl-Zalessky,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,1
+12,C12,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,1
+13,C13,Perm,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+14,C14,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+15,C15,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+16,C16,Zelenograd,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+17,C17,Voronezh,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+18,C18,Moscow,Russian Federation,2,Large-Scale Wholesaler-1,Referral by the Central Office,0
+19,C19,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+20,C20,Samara,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+21,C21,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+22,C22,Moscow,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+23,C23,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,1
+24,C24,Yekaterinburgh,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+25,C25,Nizhny Novgorod,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+26,C26,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+28,C27,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+29,C28,Orekhovo-Zuyevo,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+31,C29,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+32,C30,Moscow,Russian Federation,7,Consumer,Other,1
+33,C31,Mogilev,Belarus,5,Retailer,Referral by the Central Office,0
+34,C32,Voronezh,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+35,C33,Omsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+36,C34,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Other,1
+37,C35,Moscow,Russian Federation,5,Retailer,Other,1
+38,C36,Moscow,Russian Federation,5,Retailer,Other,0
+39,C37,Serpukhov,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+40,C38,Moscow,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+41,C39,Khabarovsk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+42,C40,Murmansk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+43,C41,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+44,C42,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+45,C43,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+47,C44,Sochi,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+48,C45,Tver,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+50,C46,Murmansk,Russian Federation,7,Retailer,Advertisement in National Wholesale Magazine,1
+51,C47,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+52,C48,Tver,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+53,C49,Omsk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+54,C50,Ulyanovsk,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,1
+55,C51,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+56,C52,Surgut,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+57,C53,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+58,C54,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+59,C55,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+60,C56,Kirov,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+61,C57,Moscow,Russian Federation,5,Retailer,Other,1
+62,C58,Severodvinsk,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+63,C59,Surgut,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+64,C60,Chelyabinsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+66,C61,Moscow,Russian Federation,6,Branch,Other,1
+67,C62,Moscow,Russian Federation,2,Large-Scale Wholesaler-1,Sales Calls or Visits,0
+68,C63,Krasnogorsk,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+69,C64,Orenburg,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+71,C65,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+72,C66,Novomoskovsk,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+73,C67,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+74,C68,Yuzhno-Sakhalinsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+76,C69,Novosibirsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+78,C70,Moscow,Russian Federation,5,Retailer,Other,0
+79,C71,Moscow,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+81,C72,Khabarovsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+82,C73,Voronezh,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+83,C74,Kazan,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+84,C75,Yekaterinburgh,Russian Federation,1,Large-Scale Wholesaler-1,Advertisement in National Wholesale Magazine,0
+85,C76,Astrakhan,Russian Federation,5,Large-Scale Wholesaler-2,Advertisement in National Wholesale Magazine,0
+86,C77,Kurgan,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+87,C78,Irkutsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+88,C79,Rostov-on-Don,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+89,C80,Saratov,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+90,C81,Abakan,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+91,C82,Mineralnye Vody,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+92,C83,Novosibirsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+93,C84,Mytishchi,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+94,C85,Volgograd,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,1
+95,C86,Voronezh,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+96,C87,Chelyabinsk,Russian Federation,1,Large-Scale Wholesaler-2,Sales Calls or Visits,0
+97,C88,Ryazan,Russian Federation,5,Small-Scale Wholesaler,Sales Calls or Visits,0
+98,C89,Omsk,Russian Federation,1,Large-Scale Wholesaler-2,Referral by the Central Office,0
+99,C90,Samara,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+100,C91,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+101,C92,Chelyabinsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,1
+102,C93,Ryazan,Russian Federation,5,Small-Scale Wholesaler,Sales Calls or Visits,0
+103,C94,Chelyabinsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+104,C95,Tyumen,Russian Federation,4,Retailer,Other,1
+105,C96,Penza,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+106,C97,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+107,C98,Tula,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+108,C99,Krasnoyarsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+109,C100,Ivanovo,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,1
+110,C101,Yekaterinburgh,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+111,C102,Perm,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+112,C103,Tolyatti,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+114,C104,Saint Petersburg,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+116,C105,Pavlovsky Posad,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+117,C106,Petrozavodsk,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+118,C107,Yekaterinburgh,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+119,C108,Moscow,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+120,C109,Nizhny Novgorod,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+122,C110,Khabarovsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+123,C111,Neryungri,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+124,C112,Khabarovsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+126,C113,Kovrov,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+127,C114,Minsk,Belarus,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+128,C115,Petropavlovsk-Kamchatsky,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+129,C116,Ivanovo,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+130,C117,Orenburg,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+131,C118,Volgodonsk,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+132,C119,Moscow,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+133,C120,Gomel,Belarus,5,Retailer,Advertisement in National Wholesale Magazine,0
+134,C121,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+135,C122,Samara,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+136,C123,Yaroslavl,Russian Federation,5,Retailer,Trade Shows,1
+137,C124,Orenburg,Russian Federation,4,Small-Scale Wholesaler,Trade Shows,1
+138,C125,Kemerovo,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+139,C126,Kostroma,Russian Federation,5,Retailer,Trade Shows,0
+140,C127,Pyatigorsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+141,C128,Novokuznetsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,1
+142,C129,Tver,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+143,C130,Pavlovsky Posad,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+145,C131,Tyumen,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+147,C132,Magadan,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+148,C133,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+149,C134,Kurgan,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+151,C135,Sochi,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+152,C136,Cherepovets,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+153,C137,Tobolsk,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+155,C138,Krasnoyarsk,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+156,C139,Uglich,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+157,C140,Khimki,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+158,C141,Lyubertsy,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+159,C142,Omsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+160,C143,Syktyvkar,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+161,C144,Ramenskoye,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+162,C145,Vladimir,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+163,C146,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+164,C147,Saint Petersburg,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+165,C148,Ryazan,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+166,C149,Kostroma,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+167,C150,Saint Petersburg,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+169,C151,Volgograd,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+170,C152,Kostroma,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+171,C153,Yuzhno-Sakhalinsk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+172,C154,Zheleznodorozhny,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+173,C155,Penza,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+174,C156,Zernograd,Russian Federation,5,Small-Scale Wholesaler,Referral by Third Parties,0
+175,C157,Saint Petersburg,Russian Federation,4,Small-Scale Wholesaler,Referral by the Central Office,0
+176,C158,Saratov,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+177,C159,Shakhovskaya,Russian Federation,5,Small-Scale Wholesaler,,0
+178,C160,Oryol,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,1
+179,C161,Chelyabinsk,Russian Federation,1,Large-Scale Wholesaler-1,,0
+180,C162,Ukhta,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+181,C163,Tomsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+182,C164,Rostov-on-Don,Russian Federation,2,Large-Scale Wholesaler-1,Referral by the Central Office,0
+183,C165,Saratov,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+184,C166,Istra,Russian Federation,5,Retailer,,0
+185,C167,Rostov-on-Don,Russian Federation,4,Large-Scale Wholesaler-1,Sales Calls or Visits,0
+186,C168,Saint Petersburg,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+187,C169,Vladimir,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+188,C170,Perm,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+189,C171,Krasnodar,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+190,C172,Krasnodar,Russian Federation,1,Large-Scale Wholesaler-1,Sales Calls or Visits,0
+191,C173,Krasnodar,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+192,C174,Tula,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+193,C175,Chelyabinsk,Russian Federation,1,Large-Scale Wholesaler-1,,0
+194,C176,Murmansk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+195,C177,Perm,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+196,C178,Moscow,Russian Federation,2,Small-Scale Wholesaler,Other,0
+198,C179,Saint Petersburg,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+199,C180,Nizhnevartovsk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+200,C181,Moscow,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+201,C182,Belgorod,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+202,C183,Naro-Fominsk,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,1
+203,C184,Naberezhnye Chelny,Russian Federation,2,Small-Scale Wholesaler,Referral by the Central Office,0
+204,C185,Omsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,1
+205,C186,Barnaul,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+206,C187,Saratov,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+207,C188,Moscow,Russian Federation,5,Retailer,Other,0
+208,C189,Moscow,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+209,C190,Moscow,Russian Federation,4,Small-Scale Wholesaler,Organic Search,0
+210,C191,Tomsk,Russian Federation,1,Large-Scale Wholesaler-1,Referral by the Central Office,0
+211,C192,Tambov,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+213,C193,Maloyaroslavets,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+215,C194,Moscow,Russian Federation,4,Small-Scale Wholesaler,Referral by Third Parties,0
+216,C195,Khabarovsk,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+217,C196,Kazan,Russian Federation,5,Retailer,Advertisement in Regional Wholesaler Magazine,0
+218,C197,Moscow,Russian Federation,1,Large-Scale Wholesaler-2,Sales Calls or Visits,0
+219,C198,Tver,Russian Federation,1,Large-Scale Wholesaler-2,Referral by the Central Office,0
+221,C199,Moscow,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+222,C200,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+223,C201,Nadym,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+224,C202,Smolensk,Russian Federation,2,Large-Scale Wholesaler-2,Referral by the Central Office,0
+225,C203,Vologda,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+226,C204,Naryan-Mar,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+227,C205,Moscow,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+228,C206,Penza,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+229,C207,Moscow,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+230,C208,Dolgoprudny,Russian Federation,4,Retailer,Advertisement in National Wholesale Magazine,0
+231,C209,Moscow,Russian Federation,3,HyPermarket,Other,0
+232,C210,Saratov,Russian Federation,4,Small-Scale Wholesaler,Referral by Third Parties,0
+233,C211,Samara,Russian Federation,2,Small-Scale Wholesaler,Sales Calls or Visits,0
+234,C212,Chelyabinsk,Russian Federation,4,Small-Scale Wholesaler,Referral by the Central Office,0
+235,C213,Kovrov,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+236,C214,Tula,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+237,C215,Khabarovsk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+238,C216,Moscow,Russian Federation,5,Retailer,Advertisement in National Wholesale Magazine,0
+239,C217,Belgorod,Russian Federation,5,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+240,C218,Rostov-on-Don,Russian Federation,4,Retailer,Advertisement in National Wholesale Magazine,0
+241,C219,Moscow,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+242,C220,Pavlovsky Posad,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+243,C221,Vologda,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+244,C222,Yakutsk,Russian Federation,4,Small-Scale Wholesaler,Advertisement in National Wholesale Magazine,0
+245,C223,Nizhny Novgorod,Russian Federation,5,Retailer,Sales Calls or Visits,0
+246,C224,Kemerovo,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0
+247,C225,Moscow,Russian Federation,4,Small-Scale Wholesaler,Sales Calls or Visits,0

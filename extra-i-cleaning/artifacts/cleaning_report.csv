@@ -1,0 +1,12 @@
+table,rows,cols,source_encoding,id_cols_count,id_cols,date_cols_count,date_cols,invalid_date_total,imputed_string_total,imputed_string_counts,orderdate_gt_shipdate_cnt
+customers,225,8,utf-16,1,customer_id,0,,0,0,{},0
+employees,15,2,utf-16,1,employee_id,0,,0,0,{},0
+inventory_transactions,20951,9,utf-8,4,"transaction_id,product_id,purchase_order_id,missing_id",1,transaction_date,20950,0,{},0
+order_details,105757,5,utf-8,3,"order_detail_id,order_id,product_id",0,,0,0,{},0
+orders,2286,9,utf-8,4,"order_id,customer_id,employee_id,shipping_method_id",2,"order_date,ship_date",4572,0,{},0
+payment_methods,3,2,utf-8,1,payment_method_id,0,,0,0,{},0
+payments,686,5,utf-8,3,"payment_id,order_id,payment_method_id",1,payment_date,686,0,{},0
+products,4183,14,utf-8,1,product_id,1,inventory_date,4183,4107,{'color': 4107},0
+purchase_orders,232,5,utf-8,4,"purchase_order_id,supplier_id,employee_id,shipping_method_id",1,order_date,232,0,{},0
+shipping_methods,4,2,utf-8,1,shipping_method_id,0,,0,0,{},0
+suppliers,2,2,utf-8,1,supplier_id,0,,0,0,{},0
