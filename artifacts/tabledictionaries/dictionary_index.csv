@@ -1,0 +1,5 @@
+table_schema,table_name,column_name,total_rows,distinct_cnt_mapped,null_cnt,blank_cnt,top_value,top_cnt,top_pct
+stg,shipping_methods,shipping_method_id,4,4,0,0,1,1,25.00
+stg,shipping_methods,shipping_method,4,4,0,0,Container,1,25.00
+stg,suppliers,supplier_id,2,2,0,0,1,1,50.00
+stg,suppliers,supplier_name,2,2,0,0,S1,1,50.00

@@ -5,13 +5,13 @@ Minimal batch generator:
 - Load each CSV under a folder (default: raw_data/)
 - Try to coerce numeric-like object columns (e.g., "1,288.00") into numbers
 - Run pandas .describe() (numeric columns only; default behavior)
-- Save output as CSV per table into docs/tablestats/
+- Save output as CSV per table into artifacts/tablestats/
 - If a table has no numeric columns, skip (no file generated)
 
 Usage:
   python python/04_generate_describe_csv.py
-  python python/04_generate_describe_csv.py --input raw_data --out docs/tablestats
-  python python/04_generate_describe_csv.py --input extra-i-cleaning/cleaned_data --out docs/tablestats_cleaned
+  python python/04_generate_describe_csv.py --input raw_data --out artifacts/tablestats
+  python python/04_generate_describe_csv.py --input extra-i-cleaning/cleaned_data --out artifacts/tablestats_cleaned
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ def coerce_numeric_like_object_columns(df: pd.DataFrame, min_non_null_ratio: flo
     - Handles values like "1,288.00", " 603.50 ", "2,000"
     - Leaves true categorical columns (e.g., Country/Region) untouched
     """
-    obj_cols = df.select_dtypes(include=["object"]).columns
+    obj_cols = df.select_dtypes(include=["object", "string"]).columns
     for col in obj_cols:
         s = df[col]
 
@@ -66,7 +66,7 @@ def coerce_numeric_like_object_columns(df: pd.DataFrame, min_non_null_ratio: flo
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", default="raw_data", help="Folder containing *.csv")
-    ap.add_argument("--out", default="docs/tablestats", help="Output folder")
+    ap.add_argument("--out", default="artifacts/tablestats", help="Output folder")
     ap.add_argument("--ratio", type=float, default=0.85, help="min ratio to coerce object->numeric")
     args = ap.parse_args()
 
