@@ -18,7 +18,7 @@ This doc explains **how `artifacts/scorecard.csv` is produced**, using two repro
   - `raw` tables (loaded from `raw_data/*.csv`)
   - `stg` views (created by `sql/00_setup/02_create_stg_views.sql`)
 
-> Import/loading is documented separately in `docs/01_import_csv.md`.
+> Import/loading is documented separately in `docs/01_import_csv_howto.md`.
 
 ### Repo structure (expected)
 - `sql/00_setup/`

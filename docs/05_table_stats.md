@@ -33,7 +33,7 @@
 **dictionary**
 full dict list in 
 `artifacts/tabledictionaries/stg__customers__country__dict.csv`
-`artifacts/tabledictionaries/stg__customers__class__dict.csv`
+`artifacts/tabledictionaries/sstg__customers__customer_class__dict.csv`
 `artifacts/tabledictionaries/stg__discontinued__dict.csv`
 `artifacts/tabledictionaries/stg__lead_source__dict.csv`
 `artifacts/tabledictionaries/stg__price_category__dict.csv`

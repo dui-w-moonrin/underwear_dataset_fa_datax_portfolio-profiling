@@ -198,7 +198,15 @@ left join stg.parent_table p
   - FA follow-up: decide which attributes are **required** for analytics (e.g., Category/Gender/Size) vs optional.
 
 
-## 6) Severity rubric (simple)
+### Other notable anomalies (profiling flags)
+
+- **OrderDate > ShipDate**: detected **12 rows** where `orders.order_date` occurs after `orders.ship_date` (unexpected sequence; flag for review).
+- **ShipDate out-of-window**: observed an early `orders.ship_date` minimum of **2001-10-11**, which is outside the main orders window (**2003–2006**) and may indicate parsing/entry issues or mixed timeline records.
+
+> Note: These are **profiling flags only** — we do not take corrective actions in this repo; we simply surface potential data quality concerns for downstream consumers to validate.
+
+
+## 7) Severity rubric (simple)
 
 - **High**: affects major workflow linkage and impact > ~5–10%
 - **Medium**: major linkage but impact 1–5%
@@ -211,7 +219,7 @@ Current severity calls:
 
 ---
 
-## 7) Next steps (suggested order)
+## 8) Next steps (suggested order)
 
 1) Keep this doc + scorecard as “profiling complete”
 2) If extending:

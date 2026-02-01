@@ -48,7 +48,7 @@ This mirrors FA responsibilities such as data requirements, mapping logic, valid
 
 ## How to Reproduce
 See
- `docs/01_import_csv_howto_md` and `docs/02_scorecard_howto.md`.
+ `docs/01_import_csv_howto.md` and `docs/02_scorecard_howto.md`.
 
 
 ## Dataset Scorecard (Preview)
@@ -72,7 +72,7 @@ Full details in `docs/03_er_full_as_is.md`
 
 - Full scorecard (raw): `artifacts/scorecard.csv`
 - Full scorecard (with score): `artifacts/scorecard_100.csv`
-- Full table statistics: `docs/tablestats/README.md`, `docs/03_table_stats.md` and `docs/tablestats/*.csv`
+- Full table statistics: `docs/tablestats/README.md`, `docs/05_table_stats.md` and `artifacts/tablestats/*.csv`
 - How the scorecard is generated: `docs/02_scorecard_howto.md`
 
 ### Scoring rule (simple / explainable)
@@ -111,8 +111,9 @@ Full details (Mermaid + left/right breakdown): `docs/04_flowchart_mermaid.md`.
 
 ## Date format note (important)
 
-- In `raw`/`stg`, date fields are stored as **text** (CSV source), not native `date/timestamp`.
+- Date fields in `raw` and `stg.*` are stored as raw text strings from the CSV source, and are converted to native `date/timestamp` only during scoring queries.
 - Observed formats include US-style **M/D/YYYY** (e.g., `10/13/2003`) and other variants.
 - Therefore, any `date_min` / `date_max` in the scorecard is computed via a **safe parsing rule** (try-parse) and should be treated as a profiling signal, not a guaranteed canonical date type.
+- “Dates in stg.* are stored as text (raw string) and parsed to date only in scoring queries.”
 
-Full breakdown and hypotheses: `docs/05_recon_buckets_and_exception_list.md`
+Full breakdown and hypotheses: `docs/06_recon_buckets_and_exception_list.md`
